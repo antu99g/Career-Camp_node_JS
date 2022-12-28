@@ -1,0 +1,128 @@
+.downloadBtn{
+    position: absolute;
+    top: 1vh;
+    right: 2vw;
+}
+.formBorder{
+    padding: 2vh 2vw;
+}
+.interviewForm{
+    margin-top: 5vh;
+    padding-left: 30px;
+    position: relative;
+}
+.interviewForm button{
+    padding: 3px 5px 4px;
+   margin-top: 2vh;
+}
+.interviewForm button i{
+    margin-right: 5px;
+}
+#interviewFormHeader{
+    margin-bottom: 3vh;
+}
+#addStudentSection{
+    position: relative;
+    display: flex;
+    margin: 3vh 0 1vh;
+}
+#studentList{
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    border: 1px solid grey;
+}
+#studentList > div{
+    padding: 2px 5px;
+    border-top: 1px solid lightgrey;
+}
+#addStudentBtn{
+    padding: 3px 0 3px 5px;
+    position: relative;
+    border: 1px solid black;
+    border-right: 0;
+}
+#addStudentBtn:hover{
+    cursor: default;
+}
+#addStudentBtn:after{
+    content: '';
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    right: -11px;
+    top: 4px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    transform: rotate(-43deg);
+}
+#addedStudents{
+    margin-left: 30px;
+    display: flex;
+}
+#addedStudents > div{
+    border: 1px solid black;
+    padding: 2px 5px 0;
+    margin-right: 8px;
+}
+#addedStudents > div > i{
+    margin-left: 5px;
+}
+#allInterviewList{
+    margin-top: 4vh;
+    padding-left: 3vw;
+}
+#allInterviewList h2{
+    margin-bottom: 3vh;
+	color: purple;
+}
+.eachInterview{
+    padding: 5px 10px;
+    border: 1px solid purple;
+    width: 70%;
+    margin-top: 2vh;
+	border-radius: 5px;
+    position: relative;
+}
+.eachInterview > p{
+    color: darkslategrey;
+    font-size: 1.2em;
+}
+.eachInterview p:first-child{
+    margin-top: 8px;
+}
+.eachInterview > form{
+    position: absolute;
+    top: 20px;
+    right: 10px;
+}
+.eachInterview .fa-caret-down{
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    font-size: 1.8em;
+    color: purple;
+}
+.listOfStudents{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.listOfStudents > li{
+    padding: 5px;
+    padding-left: 1vw;
+    border-top: 1px solid lightgrey;
+    position: relative;
+}
+.listOfStudents > li p:first-child{
+    margin: 0 0 2px;
+}
+.listOfStudents li form {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+}
+.listOfStudents > li p small {
+    margin-left: 10px;
+}

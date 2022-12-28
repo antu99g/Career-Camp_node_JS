@@ -1,0 +1,31 @@
+nav{
+    background-color: purple;
+    width: 100%;
+    padding: 1.5vh 1vw 2vh;
+    color: white;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav span:first-child{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav h2{
+    color: white;
+    margin: 0;
+    margin-right: 3vw;
+}
+nav a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin: 0 2vw;
+}
+nav a:hover{
+    text-decoration: underline;
+    color: white;
+    transform: scale(1.05);
+}

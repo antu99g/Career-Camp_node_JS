@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/css/students.css">
+
+
+<!-- Button to download all student details as csv -->
+<button class="downloadBtn"><a href="/get-student-details"><i class="fa-solid fa-arrow-down" style="margin-right: 5px;"></i>Download Students Log</a></button>
+
+
+<!-- Form to add new student data -->
+<form action="/add-student" method="post" id="addStudent">
+    <div>
+        <div>
+            <h5>Student Details</h5>
+            <p>Name <input type="text" name="name" required></p>
+            <p>Batch <input type="text" name="batch" required></p>
+            <p>College <input type="text" name="college" required></p>
+        </div>
+    
+        <div>
+            <h5>Course Scores</h5>
+            <p>DSA <input type="number" name="dsaScore"></p>
+            <p>Web Development <input type="number" name="webdScore"></p>
+            <p>React <input type="number" name="reactScore"></p>
+        </div>
+    
+        <div>
+            <h5>Placement Status</h5>
+            <div>
+                <input type="radio" name="placementStatus" value="Placed" id="placed">
+                <label for="placed">Placed</label>
+            </div>
+            <input type="radio" name="placementStatus" value="Not placed" id="not-placed">
+            <label for="placed">Not Placed</label>
+        </div>
+    </div>
+
+    <button type="submit" class="submitBtn"><i class="fa-solid fa-plus"></i>Add Student</button>
+</form>
+
+
+
+<h2 class="studentHeader">Students</h2>
+
+<!-- All students list -->
+
+<div id="allStudentList">
+    
+    <% for(let student of allStudents){ %>
+        <div>
+            <span>
+                <p class="name"><%= student.name %></p>
+                <p class="college"><%= student.college %></p>
+            </span>
+            <span>
+                <p class="batch">Batch: <%= student.batch %></p>
+                <small class="pStatus"><%= student.placementStatus %></small>
+            </span>
+        </div>
+    <% } %>
+</div>
+
+
+<script src="/js/students.js"></script>

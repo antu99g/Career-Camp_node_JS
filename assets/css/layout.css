@@ -1,0 +1,35 @@
+body{
+	margin: 0 0 4vh;
+}
+a {
+	text-decoration: none;
+}
+.downloadBtn {
+	display: block;
+	background-color: rgb(226, 45, 226);
+	color: white;
+	border: 0;
+	border-radius: 5px;
+	padding: 5px 8px 6px;
+	font-size: 1.2em;
+	font-weight: 600;
+}
+.downloadBtn a{
+	color: white;
+}
+
+.submitBtn{    
+	background-color: transparent;
+	border: 2px solid rgb(179, 26, 179);
+	border-radius: 5px;
+	color: rgb(179, 26, 179);
+	font-weight: 600;
+}
+.formBorder{
+	padding: 2vw;
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+}
+.hidden {
+	display: none;
+}

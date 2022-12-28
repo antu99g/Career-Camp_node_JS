@@ -1,0 +1,88 @@
+.downloadBtn{
+	margin: 2vh 2vw 2vh auto;
+}
+form{
+	padding: 2vw;
+	border-top: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
+	position: relative;
+}
+form > div{
+	display: flex;
+	justify-content: space-around;
+}
+form input{
+	border: 0;
+	border-bottom: 1px solid black;
+} 
+form input, select{
+	margin-left: 0.5vw;
+}
+form button{
+	display: block;
+	padding: 3px 8px 4px 5px;
+	margin: auto;
+   margin-top: 2vh;
+}
+form button i{
+	margin-right: 3px;
+}
+
+
+.studentHeader{
+	margin: 4vh 2vw 1.5vh;
+	color: purple;
+}
+#allStudentList{
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 1vw;
+}
+#allStudentList > div {
+	width: 30%;
+	padding: 1vh 1vw;
+	margin: 1vh 1.5vw;
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid purple;
+	border-radius: 5px;
+}
+.name{
+	font-size: 1.2em;
+}
+.college{
+	margin: 0;
+	color: grey;
+}
+.batch{
+	font-size: 1.1em;
+}
+.name, .batch{
+	margin-bottom: 1vh;
+}
+
+
+.placed{
+	color: green;
+}
+.placed::before{
+	content: '';
+	display: inline-block;
+	height: 10px;
+	width: 10px;
+	border-radius: 50%;
+	background-color: green;
+	margin-right: 3px;
+}
+.not-placed{
+	color: red;
+}
+.not-placed::before{
+	content: '';
+	display: inline-block;
+	height: 9px;
+	width: 9px;
+	border-radius: 50%;
+	background: rgb(229, 42, 42);
+	margin-right: 3px;
+}

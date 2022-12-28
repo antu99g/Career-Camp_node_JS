@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="/css/interviews.css">
+
+
+
+<!-- Form to create new interview -->
+<form action="/interview/create" method="post" class="interviewForm formBorder">
+
+	<!-- Button to download all interview details as csv -->
+	<span class="downloadBtn"><a href="/interview/get-interview-details"><i class="fa-solid fa-arrow-down" style="margin-right: 5px;"></i>Download Interview Log</a></span>
+
+	<div>
+		<h4 id="interviewFormHeader">Interview Details</h4>
+		<p>Company Name <input type="text" name="companyName" required></p>
+		<p>Interview Date <input type="date" name="interviewDate" required></p>
+	</div>
+
+	<div id="addStudentSection">
+		<span id="addStudentBtn">
+			Add Student
+			<i class="fa-solid fa-plus"></i>
+		</span>
+
+		<div id="studentList" class="hidden">            
+			<% for(let student of allStudents){ %>
+					<div class="addStudent" id="<%= student._id %>"><%= student.name %></div>
+			<% } %>
+		</div>   
+
+		<span id="addedStudents"></span>
+	</div>    
+
+	<button type="submit" class="submitBtn"><i class="fa-solid fa-calendar-check"></i>Create Interview</button>
+</form>
+
+
+<!-- List of all interviews -->
+<div id="allInterviewList">
+	<h2>Interviews</h2>
+	
+	<!-- Indivisual interview -->
+	<% for(let interview of allInterviews){ %>
+		<div class="eachInterview">
+			<p>Company Name: <%= interview.companyName %></p>
+			<p>Interview Date: <%= interview.interviewDate %></p>
+			
+			<!-- Form to add new student to an interview -->
+			<form action="/interview/add-student" method="post">
+
+				<select name="studentId">
+					<option>--Add a student--</option>
+					<% for(let student of allStudents){ %>
+						<option value="<%= student._id %>"><%= student.name %></option>
+					<% } %>
+				</select>
+				<input type="hidden" name="interviewId" value="<%= interview._id %>">
+
+				<button type="submit" class="submitBtn"><i class="fa-solid fa-plus"></i>Add</button>
+
+			</form>
+
+			<!-- Arrow to show students -->
+			<i class="fa-solid fa-caret-down"></i>
+			
+			<!-- List of all students -->
+			<ul class="hidden listOfStudents">
+				<% for(let student of interview.students){ %>
+					<li>
+						<p><%= student.candidate.name %><small class="intStatus"><%= student.interviewStatus %></small></p>
+						<small><%= student.candidate.college %></small>
+
+						<!-- Form to set interview status of a student -->
+						<form action="/interview/set-status" method="post">
+							<input type="hidden" name="interviewId" value="<%= interview.id %>">
+							<input type="hidden" name="studentId" value="<%= student.candidate.id %>">
+							<select name="interviewStatus">
+								<option value="On hold">On hold</option>
+								<option value="Pass">Pass</option>
+								<option value="Fail">Fail</option>
+								<option value="Not Attended">Not Attended</option>
+							</select>
+							<button type="submit" class="submitBtn interviewStatus"><i class="fa-solid fa-check"></i>Save</button>
+						</form>						
+					</li>
+				<% } %>
+			</ul>
+
+		</div>
+	<% } %>
+</div>
+
+
+
+<script src="/js/interviews.js"></script> 
