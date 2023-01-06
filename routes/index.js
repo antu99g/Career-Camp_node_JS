@@ -6,7 +6,7 @@ const studentsController = require('../controllers/students_controller');
 
 
 // Home page route (students)
-router.get('/', passport.checkAuthentication, studentsController.studentsPage);
+router.get("/", passport.checkAuthentication, studentsController.studentsPage);
 
 // Adding new student
 router.post('/add-student', studentsController.addStudent);
