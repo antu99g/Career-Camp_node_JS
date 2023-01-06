@@ -6,112 +6,131 @@ const {Parser, transforms: { unwind }} = require('json2csv');
 
 // Rendering Interview page
 module.exports.interviewPage = async function(req, res){
-	let interviews = await Interview.find({}).populate({
-	path: "students",
-	populate: {
-			path: "candidate"
-		},
-	});
-	let students = await Student.find({});
-
-	return res.render('interviews', {
-		title: 'Interviews',
-		allInterviews: interviews,
-		allStudents: students
-	})
+	try{
+		let interviews = await Interview.find({}).populate({
+		path: "students",
+		populate: {
+				path: "candidate"
+			},
+		});
+		let students = await Student.find({});
+	
+		return res.render('interviews', {
+			title: 'Interviews',
+			allInterviews: interviews,
+			allStudents: students
+		})
+	}catch(err){
+		console.log('Error in rendering interview page', err);
+	}
 }
 
 
 // Creating new interview
 module.exports.createInterview = async function(req, res){
-	let students = [];
-
-	if(req.body.students.length > 0){
-		students = req.body.students.map((id) => {
-			return {candidate: id, interviewStatus: 'On hold'}
-		});
+	try{
+		let students = [];
+	
+		if(req.body.students.length > 0){
+			students = req.body.students.map((id) => {
+				return {candidate: id, interviewStatus: 'On hold'}
+			});
+		}
+		
+		req.body.students = students;	// required for not mentioning each field in schema while creating
+	
+		let newInterview = await Interview.create(req.body);
+	
+		if (req.body.students.length > 0) {
+			for (let i of req.body.students) {
+				let student = await Student.findById(i.candidate);
+				student.allInterview.push({
+					company: newInterview._id,
+					interviewStatus: "On hold",
+				});
+				student.save();
+			}
+		}
+		
+		return res.redirect('back');
+	}catch(err){
+		console.log("Error in creating new interview", err);
+      return res.redirect("back");	
 	}
-	
-	req.body.students = students;	// required for not mentioning each field in schema while creating
-
-	let newInterview = await Interview.create(req.body);
-
-	if (req.body.students.length > 0) {
-      for (let i of req.body.students) {
-         let student = await Student.findById(i.candidate);
-         student.allInterview.push({
-            company: newInterview._id,
-            interviewStatus: "On hold",
-         });
-         student.save();
-      }
-   }
-	
-	return res.redirect('back');
 }
 
 
 // Setting interview-status
 module.exports.setInterviewStatus = async function(req, res){
-
-	await Interview.updateOne(
-		{ '_id': req.body.interviewId, "students.candidate": req.body.studentId },
-		{
-			$set: {
-			"students.$.interviewStatus": req.body.interviewStatus,
-			},
+	try{
+		await Interview.updateOne(
+			{ '_id': req.body.interviewId, "students.candidate": req.body.studentId },
+			{
+				$set: {
+				"students.$.interviewStatus": req.body.interviewStatus,
+				},
+			}
+		  );
+	
+	
+		if (req.body.interviewStatus == 'pass'){
+			await Student.updateOne({ _id: req.body.studentId }, {placementStatus: 'Placed'});
 		}
-  	);
-
-
-	if (req.body.interviewStatus == 'pass'){
-		await Student.updateOne({ _id: req.body.studentId }, {placementStatus: 'Placed'});
+	
+		await Student.updateOne(
+			{ _id: req.body.studentId, "allInterview.company": req.body.interviewId },
+			{
+				$set: {
+					"allInterview.$.interviewStatus": req.body.interviewStatus,
+				},
+			}
+		);
+		
+	
+		return res.redirect('back');		
+	}catch(err){
+		console.log('Error in setting interview status', err);
+		return res.redirect('back');		
 	}
 
-	await Student.updateOne(
-		{ _id: req.body.studentId, "allInterview.company": req.body.interviewId },
-		{
-			$set: {
-				"allInterview.$.interviewStatus": req.body.interviewStatus,
-			},
-		}
-	);
-	
-
-	return res.redirect('back');
 }
 
 
 // Adding new student to an interview
 module.exports.addNewStudent = async function(req, res){
-
-	if (req.body.studentId != "--Add a student--"){
-
-		let interview = await Interview.findById(req.body.interviewId);
+	try{
+		if (req.body.studentId != "--Add a student--"){
+	
+			let interview = await Interview.findById(req.body.interviewId);
+			
+			let newStudent = interview.students.filter(s => s.candidate == req.body.studentId);
 		
-		let newStudent = interview.students.filter(s => s.candidate == req.body.studentId);
+			if(newStudent.length == 0){
+		
+				interview.students.push({
+					candidate: req.body.studentId,
+					interviewStatus: 'On hold'
+				});
+		
+				interview.save();
+		
+				let student = await Student.findById(req.body.studentId);
 	
-		if(newStudent.length == 0){
+				student.allInterview.push({
+					company: interview._id,
+					interviewStatus: 'On hold'
+				});
+		
+				student.save();
+			}
+		}	
 	
-			interview.students.push({
-				candidate: req.body.studentId,
-				interviewStatus: 'On hold'
-			});
-	
-			interview.save();
-	
-			let student = await Student.findById(req.body.studentId);
+		return res.redirect("back");		
+	}catch(err){
+		console.log("Error in adding new student", err);
+      return res.redirect("back");
+	}
 
-			student.allInterview.push({
-				company: interview._id,
-				interviewStatus: 'On hold'
-			});
-	
-			student.save();
-		}
-	}	
-
-   return res.redirect("back");
 }
 
 
@@ -161,7 +180,7 @@ module.exports.downloadInterviewLog = async function(req, res){
 		res.send(csv);
 		
 	}catch(err){
-		console.log('error in downloading file', err);
+		console.log('Error in downloading file', err);
 		return res.redirect("back");
 	}
 }

@@ -4,20 +4,29 @@ const { Parser } = require("json2csv");
 
 // Rendering Home page (students-page)
 module.exports.studentsPage = async function (req, res) {
-   let students = await Student.find({});
-
-   return res.render("students", {
-      title: "All Students",
-      allStudents: students,
-   });
+   try {
+      let students = await Student.find({});
+   
+      return res.render("students", {
+         title: "All Students",
+         allStudents: students,
+      });
+   } catch (err) {
+      console.log("Error in rendering home page", err);
+   }
 };
 
 
 // Adding new student
 module.exports.addStudent = async function(req, res){
-    req.body.allInterview = [];
-    await Student.create(req.body);
-    return res.redirect('back');
+   try{
+      req.body.allInterview = [];
+      await Student.create(req.body);
+      return res.redirect('back');
+   }catch(err){
+      console.log('Error in adding new student', err);
+      return res.redirect('back');
+   }
 }
 
 
