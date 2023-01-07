@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+// Configuring environment variables
+require("dotenv").config();
+
 const db = require('./config/mongoose');
 
 const expressLayouts = require('express-ejs-layouts');
@@ -40,7 +43,7 @@ app.set('views', './views');
 app.use(
    session({
       name: "CareerCamp",
-      secret: "randomSecret",
+      secret: process.env.SESSION_SECRET,
       saveUninitialized: false,
       resave: false,
       cookie: {
@@ -68,9 +71,9 @@ app.use('/', require('./routes/index'));
 
 
 
-app.listen(port, (err) => {
-    if(err){
-        console.log(`Error in running the server: ${err}`);
-    }
-    console.log(`Server is running on port: ${port}`);
-})
+app.listen(process.env.PORT || port, (err) => {
+   if (err) {
+      console.log(`Error in running the server: ${err}`);
+   }
+   console.log(`Server is running on port: ${port}`);
+});
