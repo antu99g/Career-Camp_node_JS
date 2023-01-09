@@ -43,7 +43,7 @@ app.set('views', './views');
 app.use(
    session({
       name: "CareerCamp",
-      secret: process.env.SESSION_SECRET,
+      secret: process.env.SESSION_SECRET || "randomSecret",
       saveUninitialized: false,
       resave: false,
       cookie: {
