@@ -42,7 +42,7 @@ passport.checkAuthentication = function (req, res, next){
    if(req.isAuthenticated()){
       return next();
    }
-   return res.redirect('/user/log-in');
+   return res.redirect('/user/login');
 }
 
 

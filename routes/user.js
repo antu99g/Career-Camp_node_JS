@@ -6,23 +6,23 @@ const userController = require('../controllers/user_controller');
 
 
 // Rendering login page
-router.get('/log-in', userController.loginForm);
+router.get('/login', userController.loginForm);
 
 // Rendering signup page
-router.get('/sign-up', userController.signupForm);
+router.get('/signup', userController.signupForm);
 
 // Adding new user to database
-router.post('/sign-up', userController.signUp);
+router.post('/signup', userController.signUp);
 
 // Create new session after login
 router.post(
    '/create-session', 
-   passport.authenticate("local", { failureRedirect: '/user/sign-up' }),
+   passport.authenticate("local", { failureRedirect: '/user/signup' }),
    userController.createSession
 );
 
 // Log out
-router.get("/log-out", userController.logOut);
+router.get("/logout", userController.logOut);
 
 
 

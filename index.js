@@ -51,7 +51,8 @@ app.use(
       },
       store: MongoStore.create(
          {
-            mongoUrl: "mongodb://localhost/career_camp-db",
+            mongoUrl:
+               "mongodb+srv://root:test@cluster0.rkdmm44.mongodb.net/test",
             autoRemove: "disabled",
          },
          function (err) {

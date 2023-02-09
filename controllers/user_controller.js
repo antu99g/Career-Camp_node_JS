@@ -37,7 +37,7 @@ module.exports.signUp = async function (req, res) {
       if (!user) {
          await User.create(req.body);
       }
-      return res.redirect("/user/log-in");
+      return res.redirect("/user/login");
 
    } catch (err) {
       console.log("Error in adding a user", err);
@@ -53,6 +53,6 @@ module.exports.logOut = function (req, res) {
          console.log("Error in logging out");
          return res.redirect("back");
       }
-      return res.redirect("/user/log-in");
+      return res.redirect("/user/login");
    });
 };
