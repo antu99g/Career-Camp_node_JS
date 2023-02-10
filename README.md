@@ -12,7 +12,7 @@ To run this project, run the following command
 ```
 ## Tech Stack
 
-**Client:** `HTML` `CSS` `JavaScript`
+**Client:** `HTML` `CSS` `JavaScript` `EJS`
 
 **Server:** `NodeJS` `Express` `MongoDB Atlas` `Mongoose`
 
