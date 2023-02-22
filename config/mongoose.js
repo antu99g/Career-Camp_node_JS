@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://root:test@cluster0.rkdmm44.mongodb.net/test');
+mongoose.connect(process.env.CAREER_CAMP_MONGODB_URL);
 
 const db = mongoose.connection;
 

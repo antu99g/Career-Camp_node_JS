@@ -43,16 +43,15 @@ app.set('views', './views');
 app.use(
    session({
       name: "CareerCamp",
-      secret: process.env.SESSION_SECRET || "randomSecret",
+      secret: process.env.CAREER_CAMP_SESSION_SECRET,
       saveUninitialized: false,
       resave: false,
       cookie: {
-         maxAge: 1000 * 60 * 60 * 24,
+         maxAge: 1000 * 60 * 60 * 72,
       },
       store: MongoStore.create(
          {
-            mongoUrl:
-               "mongodb+srv://root:test@cluster0.rkdmm44.mongodb.net/test",
+            mongoUrl: process.env.CAREER_CAMP_SESSION_MONGO_URL,
             autoRemove: "disabled",
          },
          function (err) {
@@ -72,7 +71,7 @@ app.use('/', require('./routes/index'));
 
 
 
-app.listen(process.env.PORT || port, (err) => {
+app.listen(port, (err) => {
    if (err) {
       console.log(`Error in running the server: ${err}`);
    }
