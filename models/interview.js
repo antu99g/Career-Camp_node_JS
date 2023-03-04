@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { interviewStatus } = require('../controllers/interview_controller');
 
 
 const interviewSchema = new mongoose.Schema({
