@@ -1,6 +1,6 @@
 const pStatus = document.getElementsByClassName("pStatus");
 
-// Setting different colors to placed and not-placed students
+// Setting different colors for placed and not-placed students
 (function() {
   for(let stat of pStatus){
       if (stat.innerText == "Placed") {
