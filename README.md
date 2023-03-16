@@ -1,7 +1,7 @@
 
 # Career Camp
 
-This is an employee only app to maintain data of students and interviews. The employees can add students, interviews and change different statuses. All data of students and interviews can be downloaded in csv format.
+This is an employee only app to maintain data of students and interviews. The employees can add students and shedule interviews. Users can change different statuses of students. Users can delete any particular student or interview. All data of students and interviews can be downloaded in csv format.
 
 ## Run the project
 

@@ -18,35 +18,35 @@
 .interviewForm button i{
     margin-right: 5px;
 }
-#interviewFormHeader{
+.interviewFormHeader{
     margin-bottom: 3vh;
 }
-#addStudentSection{
+.addStudentSection{
     position: relative;
     display: flex;
     margin: 3vh 0 1vh;
 }
-#studentList{
+.studentList{
     background-color: white;
     position: absolute;
     top: 100%;
     z-index: 1;
     border: 1px solid grey;
 }
-#studentList > div{
+.studentList > div{
     padding: 2px 5px;
     border-top: 1px solid lightgrey;
 }
-#addStudentBtn{
+.addStudentBtn{
     padding: 3px 0 3px 5px;
     position: relative;
     border: 1px solid black;
     border-right: 0;
 }
-#addStudentBtn:hover{
+.addStudentBtn:hover{
     cursor: default;
 }
-#addStudentBtn:after{
+.addStudentBtn:after{
     content: '';
     height: 22px;
     width: 22px;
@@ -57,23 +57,23 @@
     border-right: 1px solid black;
     transform: rotate(-43deg);
 }
-#addedStudents{
+.addedStudents{
     margin-left: 30px;
     display: flex;
 }
-#addedStudents > div{
+.addedStudents > div{
     border: 1px solid black;
     padding: 2px 5px 0;
     margin-right: 8px;
 }
-#addedStudents > div > i{
+.addedStudents > div > i{
     margin-left: 5px;
 }
-#allInterviewList{
+.allInterviewList{
     margin-top: 4vh;
     padding-left: 3vw;
 }
-#allInterviewList h2{
+.allInterviewList h2{
     margin-bottom: 3vh;
 	color: purple;
 }
@@ -97,7 +97,7 @@
     top: 20px;
     right: 10px;
 }
-.eachInterview .fa-caret-down{
+.eachInterview .arrowDown{
     position: absolute;
     top: 70px;
     right: 20px;
